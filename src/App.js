@@ -6,6 +6,7 @@ import { Routes,Route } from "react-router-dom";
 import AddMentor from "./AddMentor";
 import MentorList from "./MentorList";
 import PageNotFound from "./NotFound";
+import AddStudent from "./AddStudent";
 function App() {
   return (
     <div className="App min-h-screen max-h-full">
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MentorList />}></Route>
           <Route path="/addmentor" element={<AddMentor />}></Route>
+          <Route path="/addstudent" element={<AddStudent />}></Route>
           <Route path="/students" element={<StudentList />}></Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>     

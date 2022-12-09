@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { mentorStudentUrl } from "./Global";
 
-export default function AddMentor() {
+export default function AddStudent() {
   const MyCheckbox = ({ children, ...props }) => {
     // React treats radios and checkbox inputs differently other input types, select, and textarea.
     // Formik does this too! When you specify `type` to useField(), it will
@@ -41,7 +41,7 @@ export default function AddMentor() {
           .oneOf([true], "You must accept the terms and conditions."),
       })}
       onSubmit={(values, { setSubmitting }) => {
-         axios.post(`${mentorStudentUrl}/mentor`,{
+         axios.post(`${mentorStudentUrl}/student`,{
             name:values.name,
             email:values.email,
             image:values.image,
@@ -69,7 +69,7 @@ export default function AddMentor() {
               class="block text-indigo-800 font-bold md:text-right mb-1 md:mb-0 pr-4"
               for="name"
             >
-              Mentor Name
+              Student Name
             </label>
           </div>
           <div class="md:w-2/3">

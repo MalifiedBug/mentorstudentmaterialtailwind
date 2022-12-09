@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { mentorStudentUrl } from "./Global";
 import axios from "axios";
 import StudentCard from "./StudentCard";
+
+
+
+
+
+
+
+
 export default function StudentList() {
   const [students, setStudents] = useState([]);
+
 
   useEffect(() => {
     try {
@@ -25,6 +34,7 @@ export default function StudentList() {
       alert(error);
     }
   }, []);
+
 
   return (
     <div className="flex flex-row flex-wrap gap-4">

@@ -27,7 +27,7 @@ export default function Navibar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <button onClick={()=>{navigate("/")}}  className="flex items-center focus:bg-cyan-600 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
+        <button onClick={()=>{navigate("/")}}  className="flex items-center rounded-lg focus:bg-cyan-600 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
           Mentor's
         </button>
       </Typography>
@@ -37,7 +37,7 @@ export default function Navibar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <button onClick={()=>{navigate("/students")}}  className="flex items-center focus:bg-cyan-600 bg-violet-500  active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
+        <button onClick={()=>{navigate("/students")}}  className="flex items-center rounded-lg focus:bg-cyan-600 bg-violet-500  active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
           Student's
         </button>
       </Typography>
@@ -47,7 +47,7 @@ export default function Navibar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <button onClick={()=>{navigate("/addmentor")}} className="flex items-center focus:bg-cyan-600 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
+        <button onClick={()=>{navigate("/addmentor")}} className="flex items-center rounded-lg focus:bg-cyan-600 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
           Add Mentor        
           </button>
       </Typography>
@@ -57,7 +57,7 @@ export default function Navibar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <button onClick={()=>{navigate("/addstudent")}}  className="flex items-center focus:bg-cyan-600 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
+        <button onClick={()=>{navigate("/addstudent")}}  className="flex items-center rounded-lg focus:bg-cyan-600 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 border p-2">
           Add Student
         </button>
       </Typography>

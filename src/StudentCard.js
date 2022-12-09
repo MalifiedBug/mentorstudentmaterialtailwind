@@ -4,6 +4,8 @@ import { Button } from "@material-tailwind/react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { PencilIcon, UserIcon,TrashIcon } from '@heroicons/react/24/solid'
+
 
 import { Fragment } from "react";
 import {
@@ -36,12 +38,13 @@ export default function StudentCard({student}) {
 
   return (
     <Card className="w-80">
-      <CardHeader floated={false} className="h-80">
+      <CardHeader floated={false} className="h-36 w-36">
         <img src={student.image} alt="" />
       </CardHeader>
       <CardBody className="text-center">
         <Typography variant="h4" color="blue-gray" className="mb-2">
-          {student.name}
+          {student.name}        
+
         </Typography>
         <Typography color="blue" className="font-medium" textGradient>
           {student.course}
@@ -50,8 +53,8 @@ export default function StudentCard({student}) {
       <CardFooter className="flex justify-center gap-2 pt-2">
       <Fragment>
       <Button color="yellow" size="sm" onClick={() => handleOpen("sm")} variant="gradient">
-          Edit
-        </Button>
+      <PencilIcon className="h-4 w-4"/>
+       </Button>
         <Dialog
         open={
           size === "xs" ||
@@ -83,21 +86,21 @@ export default function StudentCard({student}) {
                 about: Yup.string(),
                 course: Yup.string(),
               })}
-              onSubmit={(values, { setSubmitting }) => {
+              onSubmit={async (values, { setSubmitting }) => {
                 let initialName = student.name;
-                axios
+                await axios
                   .put(`${mentorStudentUrl}/editstudent`, {
-                    initialName: `${values.name}`,
-                    name: `${values.name}`,
-                    email: `${values.email}`,
-                    image: `${values.image}`,
-                    country: `${values.country}`,
-                    about: `${values.about}`,
-                    course: `${values.course}`,
+                    initialName:initialName,
+                    name: values.name,
+                    email: values.email,
+                    image: values.image,
+                    country: values.country,
+                    about: values.about,
+                    course: values.course,
                   })
                   .then(function (response) {
                     alert(response);
-                  })
+                  }).then(window.location.reload())
                   .catch(function (error) {
                     alert(error);
                   });
@@ -264,7 +267,7 @@ export default function StudentCard({student}) {
       </Fragment>       
       <Fragment>
       <Button color="blue" size="sm" onClick={() => handleOpenProfile("xs")} variant="gradient">
-          Profile
+          <UserIcon className="h-4 w-4"/>
         </Button>
         <Dialog
         open={
@@ -278,71 +281,78 @@ export default function StudentCard({student}) {
         sizee={sizee || "md"}
         handler={handleOpenProfile}
       >
-        <DialogHeader className="text-center">Its a simple dialog.</DialogHeader>
+        <DialogHeader className="text-center">{student.name}'s profile</DialogHeader>
         <DialogBody divider>
-        proflie info
+         Email:{student.email},<br/>
+         Country:{student.country},<br/>
+         About:{student.about}.
         </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={() => handleOpenProfile(null)}
-            className="mr-1"
-          >
-            <span>Cancel</span>
-          </Button>
+        <DialogFooter>          
           <Button
             variant="gradient"
             color="green"
             onClick={() => handleOpenProfile(null)}
           >
-            <span>Confirm</span>
+            <span>Done</span>
           </Button>
         </DialogFooter>
       </Dialog>
       </Fragment> 
         <Button size="sm" color="green">
-          call
+          Assign Mentor
         </Button>
         <Fragment>
-      <Button color="red" size="sm" onClick={() => handleOpenDelete("sm")} variant="gradient">
-          Delete
-        </Button>
-        <Dialog
-        open={
-          sizeee === "xs" ||
-          sizeee === "sm" ||
-          sizeee === "md" ||
-          sizeee === "lg" ||
-          sizeee === "xl" ||
-          sizeee === "xxl"
-        }
-        sizeee={sizeee || "md"}
-        handler={handleOpenDelete}
-      >
-        <DialogHeader className="text-center">Its a simple dialog.</DialogHeader>
-        <DialogBody divider>
-        Delete here
-        </DialogBody>
-        <DialogFooter>
           <Button
-            variant="text"
             color="red"
-            onClick={() => handleOpenDelete(null)}
-            className="mr-1"
-          >
-            <span>Cancel</span>
-          </Button>
-          <Button
+            size="sm"
+            onClick={() => handleOpenDelete("lg")}
             variant="gradient"
-            color="green"
-            onClick={() => handleOpenDelete(null)}
           >
-            <span>Confirm</span>
+            <TrashIcon className="w-4 h-4"/>
           </Button>
-        </DialogFooter>
-      </Dialog>
-      </Fragment> 
+          <Dialog
+            open={
+              sizeee === "xs" ||
+              sizeee === "sm" ||
+              sizeee === "md" ||
+              sizeee === "lg" ||
+              sizeee === "xl" ||
+              sizeee === "xxl"
+            }
+            size={sizeee || "md"}
+            handler={handleOpenDelete}
+          >
+            <DialogHeader className="text-center">
+              Delete {student.name}'s Profile?
+            </DialogHeader>
+            <DialogBody divider>
+              There's no going back! <br />
+            </DialogBody>
+            <DialogFooter>
+              <Button
+                variant="outlined"
+                color="blue"
+                onClick={() => handleOpenDelete(null)}
+                className="mr-1"
+              >
+                <span>Cancel</span>
+              </Button>
+              <Button
+                variant="gradient"
+                color="red"
+                onClick={() => {
+                  axios
+                    .delete(`${mentorStudentUrl}/deletestudent/${student.name}`)
+                    .then((response) => alert(response.msg)).then(()=>{window.location.reload()})
+                    .catch((error) => alert(error));
+                  handleOpenDelete(null);
+                }}
+              >
+                <span>Delete</span>
+              </Button>
+            </DialogFooter>
+          </Dialog>
+        </Fragment> 
       </CardFooter>
     </Card>
   );

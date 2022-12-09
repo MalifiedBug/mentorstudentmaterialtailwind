@@ -5,7 +5,7 @@ export default function PageNotFound() {
 
     const navigate = useNavigate()
   return (
-    <div class="bg-gray-100 h-screen justify-center">
+    <div class="bg-gray-100 h-full p-7 justify-center w-screen">
       <center class="mt-24 m-auto">
         <svg
           class="emoji-404 "
@@ -101,7 +101,7 @@ export default function PageNotFound() {
             <span>4 0 4</span>
           </span>
           <span class="text-gray-500 text-xl">
-            Sorry, We couldn't find what you are looking for!
+            Sorry, Page under maintenance!
           </span>
         </div>
       </center>
